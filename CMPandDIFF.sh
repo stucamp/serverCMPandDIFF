@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Change the username(if needed) and filename to the appropriate entries.
 USERNAME="stu"
 FILENAME="/home/stu/testIP1"
 
@@ -27,8 +28,10 @@ fi
 for f in "${files_array[@]}"; do
 	echo ""
 	echo "Retreiving file from ${f}"
+
 	#Can use this line instead, with username if needed
 	#scp "$USERNAME@${f}:${FILENAME}" "${DIRcurr}/${f}.temp"
+
 	scp "${f}:${FILENAME}" "${DIRcurr}/${f}.temp"
 done
 
@@ -53,7 +56,6 @@ if [ -d $DIRorig ]; then
 			if ! cmp -s "${DIRcurr}/${j}.temp" "${DIRcurr}/${BASE}.temp"; then
 				echo "Testing: ${j} == different!"
 				isSame=false
-				break
 			else
 				echo "Testing: ${j} == same."
 			fi
@@ -101,7 +103,4 @@ echo "Removing current copies to prepare for next run..."
 rm -rf $DIRcurr
 echo ""
 echo "Ready to run again!"
-
-
-
 
